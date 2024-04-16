@@ -8,6 +8,7 @@
   <table id="list">
     <thead>
       <tr>
+        <th></th>
         <th>Airline</th>
         <th>Airport</th>
         <th>FlightNo</th>
@@ -17,6 +18,9 @@
     <tbody>
       <% flights.forEach((flight) => { %>
       <tr>
+        <td>
+          <a href="/flights/<%= flight._id %>">[👁️]</a>
+        </td>
         <td><%= flight.airline %></td>
         <td><%= flight.airport %></td>
         <td><%= flight.flightNo %></td>
