@@ -1,5 +1,19 @@
 import { Flight } from "../models/flight.js"
 
+function index(req, res) {
+  Flight.find({})
+  .then(flights => {
+    res.render("flights/index",{
+      title: "All Flights",
+      flights: flights,
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect('/')
+  })
+}
+
 function newFlight (req, res) {
   res.render("flights/new", {
     title: "New Flight"
@@ -16,7 +30,7 @@ function create(req, res) {
 	}
   Flight.create(req.body)
   .then(flight => {
-    res.redirect("/flights/new")
+    res.redirect("/flights")
   })
   .catch(err => {
     console.log(err)
@@ -27,4 +41,5 @@ function create(req, res) {
 export {
   newFlight as new,
   create,
+  index,
 }
