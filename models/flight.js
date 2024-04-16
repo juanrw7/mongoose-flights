@@ -23,7 +23,8 @@ const flightSchema = new Schema({
     type: Date,
     //default: one year from current date
   }
-
+}, {
+  timestamps: true
 })
 
 
