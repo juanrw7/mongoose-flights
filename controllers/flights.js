@@ -1,11 +1,15 @@
 import { Flight } from "../models/flight.js"
 
 function index(req, res) {
+  const newFlight = new Flight()
+  const dt = newFlight.departs
+  const departsDate = dt.toLocaleString('en-US', {month: 'numeric', day: 'numeric', year: '2-digit'})
   Flight.find({})
   .then(flights => {
     res.render("flights/index",{
       title: "All Flights",
       flights: flights,
+      departsDate,
     })
   })
   .catch(err => {
@@ -15,10 +19,8 @@ function index(req, res) {
 }
 
 function newFlight (req, res) {
-  const newFlight = new Flight();
-// Obtain the default date
-  const dt = newFlight.departs;
-// Format the date for the value attribute of the input
+  const newFlight = new Flight()
+  const dt = newFlight.departs
   const departsDate = dt.toISOString().slice(0, 16)
   res.render("flights/new", {
     title: "New Flight",
