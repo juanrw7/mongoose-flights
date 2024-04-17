@@ -36,7 +36,7 @@ method="POST"
   <table>
     <thead>
       <tr>
-        <th></th>
+        <th>Added</th>
         <th>Seat</th>
         <th>Price</th>
       </tr>
@@ -45,7 +45,7 @@ method="POST"
       <% flight.tickets.forEach(function(ticket) { %>
       
         <tr>
-          <td><%#= ticket.createdAt.toLocaleDateString() %>-</td>
+          <td><%= ticket.createdAt.toLocaleString('en-US', {month: 'numeric', day: 'numeric', year: '2-digit'})%></td>
           <td><%= ticket.seat %></td>
           <td><%= ticket.price %></td>
         </tr>
