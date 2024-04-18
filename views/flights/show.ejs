@@ -14,36 +14,48 @@
     <div>Airport:  <%= flight.airport %></div>
     <div>FlightNo:  <%= flight.flightNo %></div>
     <div>Departs:  <%= flight.departs %></div>
-    <br>
-    <br>
-    <a href="/flights">Back</a>
+    <div>Meals served:</div>
+    <ul>
+      <% flight.foodServed.forEach(meal => { %>
+        <li><%= meal.name %></li>
+      <% }) %>
+    </ul>
   </section>
-
-<h3>Add a Ticket to This Flight</h3>
-<form 
-action="/flights/<%= flight._id %>/tickets" 
-method="POST"
->
-<label for="seat-input">Seat (A1-F99): </label>
-<input name="seat" required pattern="[A-F][1-9]\d?">
-<label for="price-input">Price: </label>
-<input type="number" name="price" min="0">
-<button type="submit">Add Ticket</button>
-</form>
-<br>
-<% if (flight.tickets.length) { %>
+  <br>
+  <form action="/flights/<%= flight._id %>/meals" method="POST">
+    <select name="mealId">
+      <% meals.forEach(meal => { %>
+        <option value="<%= meal._id %>"><%= meal.name %></option>
+      <% }) %>
+    </select>
+    <button type="submit">Add Meal to Flight </button>
+  </form>
+  <br>
+  <h2>Tickets</h2>
+  <h3>Add a Ticket to This Flight</h3>
+  <form 
+  action="/flights/<%= flight._id %>/tickets" 
+  method="POST"
+  >
+    <label for="seat-input">Seat (A1-F99): </label>
+    <input name="seat" required pattern="[A-F][1-9]\d?">
+    <label for="price-input">Price: </label>
+    <input type="number" name="price" min="0">
+    <button type="submit">Add Ticket</button>
+  </form>
+  <br>
+  <% if (flight.tickets.length) { %>
   <h3>Current Tickets</h3>
   <table>
     <thead>
       <tr>
-        <th>Added</th>
-        <th>Seat</th>
-        <th>Price</th>
+      <th>Added</th>
+      <th>Seat</th>
+      <th>Price</th>
       </tr>
     </thead>
     <tbody>
       <% flight.tickets.forEach(function(ticket) { %>
-      
         <tr>
           <td><%= ticket.createdAt.toLocaleString('en-US', {month: 'numeric', day: 'numeric', year: '2-digit'})%></td>
           <td><%= ticket.seat %></td>
@@ -52,9 +64,9 @@ method="POST"
       <% }) %>
     </tbody>
   </table>
-<% } else {%>
-  <h3>No Tickets Yet</h3>
-<% } %>
+  <% } else {%>
+    <h3>No Tickets Yet</h3>
+  <% } %>
 
 </main>
 
