@@ -1,0 +1,30 @@
+<%- include('../partials/html-head') %>
+<%- include('../partials/nav') %>
+
+<main>
+  <h1><%= title %></h1>
+  <h4>Make sure the meal is not already on the list!</h4>
+
+  <form action="/meals" method="POST">
+    <label for="meal-input">Meal:</label>
+    <input type="text" name="name" id="meal-input">
+    <button type="submit">Add Meal</button>
+  </form>
+  <br>
+  <br>
+  <table>
+    <thead>
+      <th>Current Meals</th>
+    </thead>
+    <tbody>
+      <% meals.forEach(meal => { %>
+        <tr>
+        <td><%= meal.name %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  
+</main>
+
+<%- include('../partials/footer') %>
